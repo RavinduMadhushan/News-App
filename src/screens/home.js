@@ -1,45 +1,57 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
-import { createBottomTabNavigator, createAppContainer } from "react-navigation";
-import { LocalScreen } from "./local";
-import { BreakingScreen } from "./breaking";
-import { InternationalScreen } from "./international";
-import { SportsScreen } from "./sports";
+import {
+  createBottomTabNavigator,
+  createAppContainer,
+  tabBarOptions
+} from "react-navigation";
+import { StyleSheet } from "react-native";
+import LocalASNews from "./international";
+
+import SportNews from "./sportnews";
+import BreakingNews from "./breakingnews";
 
 export class HomeScreen extends Component {
   static navigationOptions = {
     title: "NewsApp",
-    headerTintColor: "#000000",
+    headerTintColor: "#FFFFFF",
     headerStyle: {
       backgroundColor: "#1976D2"
     },
     headerTitleStyle: {
-      fontSize: 18
+      fontSize: 16
     }
   };
 
   render() {
     const Tabs = createBottomTabNavigator(
       {
-        Breaking: {
-          screen: BreakingScreen
-        },
         Local: {
-          screen: LocalScreen
+          screen: LocalASNews
         },
         International: {
-          screen: InternationalScreen
+          screen: BreakingNews
         },
         Sports: {
-          screen: SportsScreen
+          screen: SportNews
         }
       },
       {
-        initialRouteName: "Breaking"
+        initialRouteName: "Local"
+      },
+      {
+        tabBarOptions: {
+          activeTintColor: "#e91e63",
+          labelStyle: {
+            fontSize: 12
+          },
+          style: {
+            backgroundColor: "#1976D2"
+          }
+        }
       }
     );
 
     const Main = createAppContainer(Tabs);
-    return <Main style={{ Color: "#4DD0E1" }} />;
+    return <Main />;
   }
 }
